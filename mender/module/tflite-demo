@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+STATE="$1"
+FILES="$2"
+
+tflite_path="$FILES/files/"
+
+case "$STATE" in
+
+    NeedsArtifactReboot)
+        echo "No"
+    ;;
+
+    SupportsRollback)
+        echo "No"
+    ;;
+
+    ArtifactInstall)
+        # This module executes inference on the trained and deployed model once to demonstrate the
+		# runtime feasability on the (edge) device.
+		python3 $tflite_path/inference.py -a $tflite_path
+        ;;
+esac
+
+exit 0
